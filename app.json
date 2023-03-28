@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Aston Bank",
-    "slug": "Aston Bank",
+    "slug": "aston",
     "scheme": "astonlink",
     "privacy": "unlisted",
     "version": "1.0.0",
@@ -70,6 +70,9 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
+      "eas": {
+        "projectId": "9f1ced9b-f134-425d-aa59-bdf12b1908ca"
+      }
     }
   }
 }
