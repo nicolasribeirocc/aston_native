@@ -9,6 +9,7 @@ import {
   Share,
   Alert,
   Linking,
+  BackHandler,
 } from "react-native";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
@@ -38,6 +39,7 @@ import {
 } from "../fingerPrint/auth";
 
 import * as Contacts from 'expo-contacts';
+import { useRef } from "react";
 
 
 export default function Main({ route, navigation }) {
@@ -139,7 +141,7 @@ export default function Main({ route, navigation }) {
           }
           //alert(qrCode);
         } else {
-          _webview.injectJavaScript(`receiveBarCode('${qrCode}');`);
+          webViewRef.injectJavaScript(`receiveBarCode('${qrCode}');`);
         }
 
         route.params.qrCode = "";
@@ -557,18 +559,45 @@ export default function Main({ route, navigation }) {
       }, 30000);
     }
   };
+  
+
+  //VOLTAR COM BOTAO DO CELULAR
+  const webViewRef = useRef()
+  const botoesFechar = () =>
+  Alert.alert('Encerrar Aston Bank', 'Deseja Fechar o Aplicativo?', [
+    {
+      text: 'Não',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'Sim', onPress: () => BackHandler.exitApp()},
+  ]);
+
+  const onNavigationStateChange = navState => {
+    const backAction = () => {
+      if(navState.url != 'https://contause.digital/Xapp/ag19/usuarioB.php' && navState.url != 'https://contause.digital/Xapp/ag19/usuario.php?s=1') {
+        webViewRef.current?.goBack()
+      } else {
+        botoesFechar()
+      }
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  };
 
   return (
     <View style={styles.container}>
       <WebView
+        onNavigationStateChange={navState => onNavigationStateChange(navState)}
         originWhitelist={["*"]}
         style={styles.webview}
-        ref={(ref) => (_webview = ref)}
-        // onLoadStart={navState => {
-
-        //   console.log('navState.nativeEvent.url', digest);
-        //   setUrl(navState.nativeEvent.url);
-        // }}
+        ref={webViewRef}
         source={{
           uri: url,
           headers: {
@@ -585,22 +614,13 @@ export default function Main({ route, navigation }) {
         androidHardwareAccelerationDisabled={true}
         allowFileAccess={true}
         allowUniversalAccessFromFileURLs={true}
-        //cacheEnabled={false}
-        //cacheMode={'LOAD_CACHE_ELSE_NETWORK'}
-        //cacheMode={'LOAD_NO_CACHE'}
-
-        //scalesPageToFit={true}
         injectedJavaScriptBeforeContentLoaded={`var loginUser = ('${digest}');`}
         onMessage={receivedMessage}
         mixedContentMode="always"
         onShouldStartLoadWithRequest={(request) => {
           return onShouldStartLoadWithRequest(request);
-        }} //for iOS
-        // onNavigationStateChange={(request) => {
-        //   return onShouldStartLoadWithRequest(request)
-        // }} //for Android
+        }}
         renderError={(error) => {
-          //console.log("error:", error);
           if (error == "NSURLErrorDomain") {
             setUrl(`${baseUrl}/usuario.php?s=1`);
           }
@@ -620,7 +640,6 @@ export default function Main({ route, navigation }) {
         </TouchableOpacity>
       )}
 
-      <StatusBar hidden />
       {displayToken && (
         <View style={styles.token}>
           <Text style={styles.tokenText}>{displayToken}</Text>
@@ -629,13 +648,7 @@ export default function Main({ route, navigation }) {
           </Text>
         </View>
       )}
-      {/* {!displayToken && (
-        <TouchableOpacity style={{}} onPress={handleToken}>
-          <Text style={{ textAlign: "right", marginRight: 10, marginTop: 20 }}>
-            gerar token
-          </Text>
-        </TouchableOpacity>
-      )} */}
+      <StatusBar />
     </View>
   );
 }
@@ -663,6 +676,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-end",
+    paddingTop: 25,
   },
   webview: {
     flex: 1,
