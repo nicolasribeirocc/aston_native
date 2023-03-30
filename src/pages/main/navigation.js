@@ -183,15 +183,15 @@ export default function Main({ route, navigation }) {
 
   const createTwoButtonAlert = (textButton = "Login digital?", typeButton) => {
     const button1 = {
-      text: "sim",
+      text: "Sim",
       onPress: () => navigation.navigate("FingerPrint"),
     };
     const button2 = {
-      text: "não",
+      text: "Não",
       onPress: () => {},
     };
     const button3 = {
-      text: "desabilitar",
+      text: "Desabilitar",
       onPress: () => {
         setFingerPrintToken("");
         setFingerPrintTokenPost("");
@@ -648,7 +648,7 @@ export default function Main({ route, navigation }) {
           </Text>
         </View>
       )}
-      <StatusBar style="auto"/>
+      <StatusBar style="light" backgroundColor="#4E5150"/>
     </View>
   );
 }
@@ -676,7 +676,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-end",
-    paddingTop: 25,
+    paddingTop: 20,
   },
   webview: {
     flex: 1,
