@@ -648,7 +648,7 @@ export default function Main({ route, navigation }) {
           </Text>
         </View>
       )}
-      <StatusBar />
+      <StatusBar style="auto"/>
     </View>
   );
 }
