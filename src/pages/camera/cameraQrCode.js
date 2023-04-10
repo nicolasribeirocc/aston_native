@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button, Platform, Image } from "react-native";
+import { Text, View, StyleSheet, Button, Platform, Image, BackHandler } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import imgQrCode from '../../../assets/icon-search-qr-code.png';
 //import api from "../../services/api";
@@ -58,6 +58,10 @@ export default function CameraQrCode({ route, navigation }) {
     //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
+  BackHandler.addEventListener('hardwareBackPress', () => {
+    navigation.goBack()
+  })
+
   if (hasPermission === null) {
     return (
       <View style={styles.textAlert}>
@@ -77,10 +81,6 @@ export default function CameraQrCode({ route, navigation }) {
     <View
       style={{
         flex: 1,
-        // marginTop:100,
-        // marginBottom: 100,
-        // marginLeft: 50,
-        // marginRight: 50,
         flexDirection: "column",
         justifyContent: "flex-end",
       }}
@@ -107,9 +107,9 @@ export default function CameraQrCode({ route, navigation }) {
         <Button title={"Tentar novamente"} onPress={() => setScanned(false)} />
       )}
       <View
-        style={styles.button}
+        style={styles.button(typeSent)}
       >
-        <Button color={Platform.select({ios: "#fff", android: "rgba(63, 81, 181, .6)"})} title={titleButton} onPress={() => navigation.goBack()} />
+        <Button color={Platform.select({ios: "#e28222", android: "#e28222"})} title={titleButton} onPress={() => navigation.goBack()} />
       </View>
     </View>
   );
@@ -118,7 +118,7 @@ export default function CameraQrCode({ route, navigation }) {
 const styles = StyleSheet.create({
   typeCodeBar: {
     width: 2,
-    height: "80%",
+    height: "100%",
     borderWidth: 2,
     borderColor: "#5f6",
   },
@@ -126,12 +126,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "rgba(63, 81, 181, .6)",
-    borderWidth: 80,
-    borderTopWidth: 15,
-    borderBottomWidth: 15,
-    borderRightWidth: 90,
-    borderLeftWidth: 90,
   },
   typeQrCode: {
     
@@ -140,11 +134,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "rgba(63, 81, 181, .6)",
-    borderTopWidth: 100,
-    borderBottomWidth: 100,
-    borderRightWidth: 30,
-    borderLeftWidth: 30,
   },
   imgQrCode: {
     width: 200,
@@ -156,9 +145,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  button: {
-    backgroundColor: "rgba(63, 81, 181, .6)",
+  button: typeSent =>  ({
+    backgroundColor: "#e28222",
     color: '#fff',
-    tintColor: '#fff'
-  },
+    tintColor: '#fff',
+    left:  typeSent == "codeBar" ? -40 : 0,
+    position: "absolute",
+    top: typeSent == "codeBar" ? '50%' : undefined,
+    margin: 'auto',
+    right: typeSent == "codeBar" ? undefined : 0,
+    bottom: typeSent == "codeBar" ? undefined : '15%',
+    transform: typeSent == 'codeBar' ? [{ rotate: '90deg' }] : [{ rotate: '0deg' }],
+  }),
 });

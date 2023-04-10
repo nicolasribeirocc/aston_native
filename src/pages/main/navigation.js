@@ -140,7 +140,7 @@ export default function Main({ route, navigation }) {
           }
           //alert(qrCode);
         } else {
-          webViewRef.injectJavaScript(`receiveBarCode('${qrCode}');`);
+          webViewRef?.current?.injectJavaScript(`receiveBarCode('${qrCode}');`);
         }
 
         route.params.qrCode = "";
