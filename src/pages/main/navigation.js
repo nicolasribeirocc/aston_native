@@ -38,7 +38,6 @@ import {
   removeTokenFingerPrint,
 } from "../fingerPrint/auth";
 
-import * as Contacts from 'expo-contacts';
 import { useRef } from "react";
 
 
@@ -276,19 +275,7 @@ export default function Main({ route, navigation }) {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (Constants.platform.ios) {
-  //       const { status } = await Permissions.askAsync(Permissions.CONTACTS);
-  //       if (status !== "granted") {
-  //         alert("Desculpe, você precisa de permissão para acessar os contatos!");
-  //       }
-  //     }
-  //   })();
-  // }, []);
-
   useEffect(() => {
-    // buscarContatos("8");
     const unsubscribe = NetInfo.addEventListener((state) => {
       if (state.isInternetReachable == false) {
         //setInternetReachable(state.isInternetReachable);
@@ -304,57 +291,6 @@ export default function Main({ route, navigation }) {
     seTkeyWebview(keyWebview + 1);
   };
   //const jsCode = ``;
-
-  const buscarContatos = async (id_new) => {
-
-    // console.log("id_new::::" + id_new);
-    // const { status } = await Permissions.askAsync(Permissions.CONTACTS);
-        // if (status !== "granted") {
-        //   alert("Desculpe, você precisa de permissão para acessar os contatos!");
-        // }
-        const { status } = await Contacts.requestPermissionsAsync();
-        if (status === 'granted') {
-          const { data } = await Contacts.getContactsAsync({
-            fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
-          });
-
-          var arrayContatos = [];
-          data.forEach(contato => {
-            var nome = contato.name;
-            if(typeof nome == "undefined"){
-              nome = "N/D";
-            }else{
-              nome.replace(/'/g, "");
-            }
-            var telefones = contato.phoneNumbers;
-            if(typeof telefones == "undefined"){
-              telefones = [];
-            }
-            var emails = contato.emailAddresses;
-            if(typeof emails == "undefined"){
-              emails = [];
-            }
-            // console.log(nome);
-            // console.log(telefones);
-            // console.log(emails);
-            arrayContatos.push({"displayName": nome, "phoneNumbers": telefones, "emailAddresses": emails});
-          });
-          // console.log(arrayContatos.length);
-
-          const jsonData = (JSON.stringify(arrayContatos));
-          // setContatos(jsonData);
-          // var enviaContatos = jsonData;
-          // console.log(jsonData);
-          // return jsonData;
-
-          const response = await api.post("/saveContact.php", {
-            contatos: jsonData,
-            id_new: id_new 
-          });
-          // console.log(response.data);
-
-        }
-  }
 
   const openCameraQrCode = (typeScan) => {
     navigation.navigate("CameraQrCode", {
@@ -385,12 +321,6 @@ export default function Main({ route, navigation }) {
   const receivedMessage = async (event) => {
     // console.log(event.nativeEvent);
     const data = JSON.parse(event.nativeEvent.data);
-
-    if (data.action == "buscaContatos") {
-      if(data.id_new > 0){
-        buscarContatos(data.id_new);
-      }
-    }
 
     if (data.action == "removeFingerPrint") {
       setFingerPrintToken("");

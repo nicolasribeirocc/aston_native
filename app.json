@@ -32,8 +32,7 @@
         "NSFaceIDUsageDescription": "Acesse o app com sua digital",
         "NSPhotoLibraryUsageDescription": "Precisamos acessar as suas fotos para importar os seus documentos.",
         "NSCameraUsageDescription": "Precisamos acessar a sua camêra para importar os seus documentos.",
-        "NSMicrophoneUsageDescription": "Precisamos acessar seu microfone para gravar videos.",
-        "NSContactsUsageDescription": "Precisamos acessar os seus contatos para localizar contas."
+        "NSMicrophoneUsageDescription": "Precisamos acessar seu microfone para gravar videos."
       }
     },
     "android": {
@@ -62,8 +61,7 @@
         "WRITE_EXTERNAL_STORAGE",
         "CAMERA",
         "INTERNET",
-        "SYSTEM_ALERT_WINDOWS",
-        "READ_CONTACTS"
+        "SYSTEM_ALERT_WINDOWS"
       ]
     },
     "web": {
