@@ -27,7 +27,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "app.astonbank.com.br",
-      "buildNumber": "228",
+      "buildNumber": "1",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Acesse o app com sua digital",
         "NSPhotoLibraryUsageDescription": "Precisamos acessar as suas fotos para importar os seus documentos.",
