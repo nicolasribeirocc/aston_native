@@ -292,6 +292,7 @@ export default function Main({ route, navigation }) {
   };
   //const jsCode = ``;
 
+
   const openCameraQrCode = (typeScan) => {
     navigation.navigate("CameraQrCode", {
       typeScan: typeScan,
@@ -606,7 +607,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-end",
-    paddingTop: 20,
+    backgroundColor: "#4E5150",
+    paddingTop: 40,
   },
   webview: {
     flex: 1,

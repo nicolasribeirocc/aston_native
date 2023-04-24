@@ -109,7 +109,7 @@ export default function CameraQrCode({ route, navigation }) {
       <View
         style={styles.button(typeSent)}
       >
-        <Button color={Platform.select({ios: "#e28222", android: "#e28222"})} title={titleButton} onPress={() => navigation.goBack()} />
+        <Button color={Platform.select({ios: "#fff", android: "#F28A1E"})} title={titleButton} onPress={() => navigation.goBack()} />
       </View>
     </View>
   );
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: typeSent =>  ({
-    backgroundColor: "#e28222",
+    backgroundColor: "#F28A1E",
     color: '#fff',
     tintColor: '#fff',
     left:  typeSent == "codeBar" ? -40 : 0,
