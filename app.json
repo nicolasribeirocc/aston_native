@@ -21,13 +21,11 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "app.astonbank.com.br",
-      "buildNumber": "228",
+      "buildNumber": "4",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Acesse o app com sua digital",
         "NSPhotoLibraryUsageDescription": "Precisamos acessar as suas fotos para importar os seus documentos.",
@@ -45,10 +43,7 @@
               "scheme": "astonlink"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
       "googleServicesFile": "./google-services.json",
