@@ -4,7 +4,6 @@
     "slug": "aston",
     "scheme": "astonlink",
     "privacy": "unlisted",
-    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,6 +23,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
+      "version": "1.0.1",
       "bundleIdentifier": "app.astonbank.com.br",
       "buildNumber": "4",
       "infoPlist": {
@@ -50,6 +50,7 @@
       "useNextNotificationsApi": true,
       "package": "app.astonbank.com.br",
       "versionCode": 4,
+      "version": "1.1.0",
       "permissions": [
         "USE_BIOMETRIC",
         "USE_FINGERPRINT",
