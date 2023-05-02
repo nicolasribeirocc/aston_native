@@ -10,7 +10,7 @@ import {
   Linking,
   BackHandler,
 } from "react-native";
-import { Constants } from "expo-constants";
+import Constants from "expo-constants";
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
@@ -603,7 +603,7 @@ const styles = StyleSheet.create({
   },
   tokenText: {
     color: "#fff",
-    backgroundColor: "#5df",
+    backgroundColor: "#e28222",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -614,7 +614,7 @@ const styles = StyleSheet.create({
     height: "20%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#283990",
+    backgroundColor: "#4E5150",
   },
   container: {
     flex: 1,
