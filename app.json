@@ -31,7 +31,8 @@
         "NSPhotoLibraryUsageDescription": "Precisamos acessar as suas fotos para importar os seus documentos.",
         "NSCameraUsageDescription": "Precisamos acessar a sua camêra para importar os seus documentos.",
         "NSMicrophoneUsageDescription": "Precisamos acessar seu microfone para gravar videos.",
-        "NSDownloadsUsageDescription": "Necessário para salvar e compartilhar seus comprovantes"
+        "NSDownloadsUsageDescription": "Necessário para salvar e compartilhar seus comprovantes",
+        "CFBundleDevelopmentRegion": "pt"
       }
     },
     "android": {
